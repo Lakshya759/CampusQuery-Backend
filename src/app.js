@@ -36,6 +36,9 @@ app.use((err, req, res, next) => {
       errors: err.errors,
     });
   }
+  app.get("/", (req, res) => {
+  res.send("Backend is live");
+});
 
   console.error(err);
 

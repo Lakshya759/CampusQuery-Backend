@@ -60,7 +60,7 @@ const signUpUser =asyncHandler(async (req,res)=>{
 
 
 
-    const verifyUrl = `http://localhost:${process.env.PORT}/api/v1/users/verify-email?token=${token}`;
+    const verifyUrl = `https://campusquery-backend-kvnf.onrender.com/api/v1/users/verify-email?token=${token}`;
 
 
     await transporter.sendMail({
