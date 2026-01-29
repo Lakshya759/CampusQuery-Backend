@@ -5,7 +5,7 @@ import { ApiError } from "./utils/ApiError.js";
 const app=express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://willowy-speculoos-f9224c.netlify.app/" 
+  "https://willowy-speculoos-f9224c.netlify.app" 
 ];
 
 app.use(cors({
