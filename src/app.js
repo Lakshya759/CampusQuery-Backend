@@ -9,15 +9,21 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin (Postman, mobile apps)
+    origin: (origin, callback) => {
+      
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      
+      if (origin.startsWith("http://localhost")) {
         return callback(null, true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
+      
+      if (origin.includes(".netlify.app")) {
+        return callback(null, true);
+      }
+
+      return callback(null, false);
     },
     credentials:true
 }))
