@@ -11,6 +11,7 @@ connectDB()
         console.log(`app is listening on port ${process.env.PORT}`);
     })
 })
-.catch(()=>{
+.catch((err)=>{
     console.log("Mongodb connection failed",err)
+    process.exit(1);
 })
