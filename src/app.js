@@ -9,22 +9,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-    origin: (origin, callback) => {
-      
-      if (!origin) return callback(null, true);
-
-      
-      if (origin.startsWith("http://localhost")) {
-        return callback(null, true);
-      }
-
-      
-      if (origin.includes(".netlify.app")) {
-        return callback(null, true);
-      }
-
-      return callback(null, false);
-    },
+    origin:true,
     credentials:true
 }))
 
