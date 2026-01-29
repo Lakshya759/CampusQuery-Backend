@@ -6,7 +6,7 @@ const app=express();
 
 
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:true,
     credentials:true
 }))
 
@@ -27,7 +27,9 @@ app.use("/api/v1/users",userRouter)
 app.use("/api/v1/posts",postRouter)
 app.use("/api/v1/answer",answerRouter)
 
-
+app.get("/", (req, res) => {
+  res.send("Backend is live");
+});
 app.use((err, req, res, next) => {
   if (err instanceof ApiError) {
     return res.status(err.statusCode).json({
@@ -36,9 +38,7 @@ app.use((err, req, res, next) => {
       errors: err.errors,
     });
   }
-  app.get("/", (req, res) => {
-  res.send("Backend is live");
-});
+  
 
   console.error(err);
 
