@@ -3,7 +3,9 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import {User} from "../models/user.model.js"
 import jwt from "jsonwebtoken"
-import nodemailer from "nodemailer"
+import { sendEmail } from "../utils/brevo.js";
+
+
 
 
 const generateAccessAndReferenceToken=async (userId)=>{
@@ -49,25 +51,18 @@ const signUpUser =asyncHandler(async (req,res)=>{
     //Generating verification token and saving it to database
     const token = jwt.sign({ email,name, password,branch,year,skills}, process.env.VERIFICATION_TOKEN_SECRET, { expiresIn: '15m' });
     
-
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-        },
-    });
+    
+   
 
 
 
     const verifyUrl = `https://campusquery-backend-kvnf.onrender.com/api/v1/users/verify-email?token=${token}`;
-
-
-    await transporter.sendMail({
-        to: email,
+    await sendEmail({
+        to: req.body.email,
         subject: "Verify your college email",
-        html: `<p>Click <a href="${verifyUrl}">here</a> to verify your email.</p>`,
+        html: `<p>Click <a href="${verifyUrl}">here</a> to verify your email.</p>`
     });
+
 
     return res.status(200).json(
         new ApiResponse(200,{}, "Verification Link Has Been Sent To Your College Email")
