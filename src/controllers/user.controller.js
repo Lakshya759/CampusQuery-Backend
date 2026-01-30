@@ -38,10 +38,10 @@ const signUpUser =asyncHandler(async (req,res)=>{
 
     
     //Checking if the user is using the college email id
-    const collegeDomain="ietlucknow.ac.in"
-    if(!email.endsWith(`@${collegeDomain}`)){
-        throw new ApiError(500,"Please login through via college E-mail id only");
-    }
+    // const collegeDomain="ietlucknow.ac.in"
+    // if(!email.endsWith(`@${collegeDomain}`)){
+    //     throw new ApiError(500,"Please login through via college E-mail id only");
+    // }
 
     //Checking if the user already existed
     const existedUser=await User.findOne({email});
